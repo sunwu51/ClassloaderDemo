@@ -6,6 +6,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
+ * 继承自ClassLoader，要自己实现加载字节码
  * Created by Frank on 2019/9/22.
  */
 public class MyCL extends ClassLoader{

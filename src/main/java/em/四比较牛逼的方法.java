@@ -5,6 +5,7 @@ import com.company.A;
 import com.company.B;
 import util.ReRun;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -18,7 +19,7 @@ public class 四比较牛逼的方法 {
         flag = false;
     }
     public static void main(String[] args) throws Exception{
-        if(flag) ReRun.reRun("C:\\Users\\Frank David\\Desktop\\cldemo\\target\\classes","em.四比较牛逼的方法",args);
+        if(flag) ReRun.reRun(System.getProperty("user.dir")+ File.separator +"target"+ File.separator +"classes",四比较牛逼的方法.class.getName(),args);
 
         new A().run();
         new B().run();

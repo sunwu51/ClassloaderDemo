@@ -1,17 +1,25 @@
 package cl;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Created by Frank on 2019/9/22.
  */
-public class ReCL extends ClassLoader{
+public class ReCL extends ClassLoader {
 
     private String classpath;
+
+    private Map<String, ClassLoader> classLoaderMap = new Hashtable<>();
 
     public ReCL(String classpath) {
         this.classpath = classpath;
     }
+
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -29,15 +37,27 @@ public class ReCL extends ClassLoader{
 
                 e.printStackTrace();
             }
-        }else if(name.equals("com.company.A")){
-            ClassLoader loader = new MyCL("C:\\Users\\Frank David\\Desktop\\cldemo\\lib","A.jar");
-            return loader.loadClass("com.company.A");
         }
-        else if(name.equals("com.company.B")){
-            ClassLoader loader = new MyCL("C:\\Users\\Frank David\\Desktop\\cldemo\\lib","B.jar");
-            return loader.loadClass("com.company.B");
+        if(name.equals("com.company.A")){
+            String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
+            try {
+                MyCL2 loader = new MyCL2(new URL[]{new URL("file:" + baseLibDir + File.separator + "A.jar")},null);
+                classLoaderMap.computeIfAbsent(name, k->loader);
+                return loader.loadClass(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
+        if(name.equals("com.company.B")){
+            String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
+            try {
+                MyCL2 loader = new MyCL2(new URL[]{new URL("file:" + baseLibDir + File.separator + "B.jar")},null);
+                classLoaderMap.computeIfAbsent(name, k->loader);
+                return loader.loadClass(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return super.loadClass(name);
     }
     //返回类的字节码
