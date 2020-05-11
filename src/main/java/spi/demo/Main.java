@@ -1,7 +1,9 @@
 package spi.demo;
 
+import cl.ReCL;
 import spi.demo.api.SpiDemo;
 
+import java.io.File;
 import java.util.ServiceLoader;
 
 /**
@@ -10,6 +12,8 @@ import java.util.ServiceLoader;
  */
 public class Main {
     public static void main(String[] args) {
+//        Logger log
+        Thread.currentThread().setContextClassLoader(new ReCL(System.getProperty("java.class.path")));
         ServiceLoader<SpiDemo> spiDemos = ServiceLoader.load(SpiDemo.class);
         for (SpiDemo spiDemo: spiDemos){
             spiDemo.hello("nick");

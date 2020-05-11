@@ -1,43 +1,28 @@
 package cl;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Hashtable;
 import java.util.Map;
 
 /**
- * Created by Frank on 2019/9/22.
+ * @author Frank
+ * @date 2020/5/12 1:00
  */
-public class ReCL extends ClassLoader {
+public class ReCL2 extends URLClassLoader {
 
     private String classpath;
 
     private Map<String, ClassLoader> classLoaderMap = new Hashtable<>();
 
-    public ReCL(String classpath) {
-        this.classpath = classpath;
+    public ReCL2(URL[] urls, ClassLoader parent) {
+        super(urls, parent);
     }
 
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
-        if(name.startsWith("em")) {
-            try {
-                byte[] classDate = getDate(name);
-
-                if (classDate == null) {
-                } else {
-                    //defineClass方法将字节码转化为类
-                    return defineClass(name, classDate, 0, classDate.length);
-                }
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-        }
         if(name.equals("com.company.A")){
             String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
             try {

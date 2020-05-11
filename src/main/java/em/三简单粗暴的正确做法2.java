@@ -1,7 +1,5 @@
 package em;
 
-import cl.MyCL;
-import cl.MyCL2;
 import com.company.A;
 import com.company.B;
 
@@ -9,12 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 /**
  * 继承URLClassLoader，不用自己写字节码加载。parent要写null
