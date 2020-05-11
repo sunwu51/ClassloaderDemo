@@ -2,6 +2,8 @@ package em;
 
 import cl.MyCL;
 import cl.MyCL2;
+import com.company.A;
+import com.company.B;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,15 +24,13 @@ public class 三简单粗暴的正确做法2 {
     public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
 
         String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
-        MyCL2 loader1 = new MyCL2(new URL[]{new URL("file:" + baseLibDir + File.separator + "A.jar")},null);
-        MyCL2 loader2 = new MyCL2(new URL[]{new URL("file:" + baseLibDir + File.separator + "B.jar")},null);
-        MyCL2 loader3 = new MyCL2(new URL[]{new URL("file:" + System.getProperty("user.dir") + File.separator + "target\\classes")});
+        ClassLoader loader1 = new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "A.jar")},null);
+        ClassLoader loader2 = new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "B.jar")},null);
 
 
 
-        Class clazzA = loader1.loadClass("com.company.A");
-        Class clazzB = loader2.loadClass("com.company.B");
-        Class clazzC = loader3.loadClass("em.三简单粗暴的正确做法2");
+        Class clazzA = loader1.loadClass(A.class.getName());
+        Class clazzB = loader2.loadClass(B.class.getName());
 
         Object a = clazzA.newInstance();
         Object b = clazzB.newInstance();
