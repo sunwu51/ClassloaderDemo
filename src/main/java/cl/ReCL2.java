@@ -24,8 +24,13 @@ public class ReCL2 extends URLClassLoader {
         if(name.equals("com.company.A")){
             String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
             try {
-                ClassLoader loader = classLoaderMap.competeIfAbsent(name,new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "A.jar")},null));
-                classLoaderMap.computeIfAbsent(name, k->loader);
+                ClassLoader loader = null;
+                if (classLoaderMap.containsKey(name)) {
+                    loader = classLoaderMap.get(name);
+                } else {
+                    loader = new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "A.jar")},null);
+                    classLoaderMap.put(name, loader);
+                }
                 return loader.loadClass(name);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -34,8 +39,13 @@ public class ReCL2 extends URLClassLoader {
         if(name.equals("com.company.B")){
             String baseLibDir = System.getProperty("user.dir") + File.separator + "lib";
             try {
-                ClassLoader loader = classLoaderMap.competeIfAbsent(name,new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "B.jar")},null));
-                classLoaderMap.computeIfAbsent(name, k->loader);
+                ClassLoader loader = null;
+                if (classLoaderMap.containsKey(name)) {
+                    loader = classLoaderMap.get(name);
+                } else {
+                    loader = new URLClassLoader(new URL[]{new URL("file:" + baseLibDir + File.separator + "B.jar")},null);
+                    classLoaderMap.put(name, loader);
+                }
                 return loader.loadClass(name);
             } catch (Exception e) {
                 e.printStackTrace();
