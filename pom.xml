@@ -13,6 +13,22 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.company</groupId>
+            <artifactId>a</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/A.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.company</groupId>
+            <artifactId>b</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/B.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -17,4 +17,4 @@ ServiceLoader<SpiDemo> spiDemos = ServiceLoader.load(SpiDemo.class);
 ```
 就可以获取实现了该接口的类的实例集合（用的是默认构造方法）。
 
-SPI是动态加载类，使用的也是AppClassLoader。他主要作用和场景是，
+SPI是动态加载类，使用的也是AppClassLoader。
